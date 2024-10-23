@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Proximidad</title>
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #map {
+            height: 100vh;
+            width: 100vw;
+       
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="userLocation.js" ></script>
+    <script src="locationDistance.js" ></script>
+
+    <script>
+        // Create a map  
+        let map         = L.map('map').setView([51.505, -0.09], 10);
+        let apiLink     = "https://gps.siarexdev.com/api/v1/";
+        let bearerToken = "3|NKSBTBDrDT5gGUAIk45x2iTHx0x9W5egC1YYELnU4758447e";
+        let userMarker; // Variable global para almacenar el marcador del usuario
+
+        //user info
+        let user_id = 1;
+        let company = "toyota";
+
+        //marcadores de activos
+        let markersLayer; // Variable global para almacenar el LayerGroup de marcadores
+
+
+        // Add a tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+       
+       //Actualizar mapa y marcadores cada x tiempo 
+       const updateInterval = 10000;
+        // Llama a getLocation cada updateInterval milisegundos
+        setInterval(getLocation, updateInterval);
+        //ubicación del usuario
+        getLocation();
+
+        //ubication de los assets
+        locationDistance();
+
+    </script>
+
+  
+
+</body>
+</html>
