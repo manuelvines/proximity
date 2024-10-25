@@ -14,7 +14,7 @@ function showPosition(position){
     let longitude  = position.coords.longitude;
 
     let customIcon = L.icon({
-        iconUrl: 'AZUL.gif', // Ruta a tu imagen de icono
+        iconUrl: 'AMARILLO.png', // Ruta a tu imagen de icono
         iconSize: [40, 40], // Tamaño del icono
 
     });

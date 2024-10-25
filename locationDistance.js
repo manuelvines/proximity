@@ -54,54 +54,60 @@ function showPositions(result) {
         // Crea un nuevo LayerGroup
         markersLayer = L.layerGroup();
 
-        let customInventoryOne = L.icon({
-            iconUrl: 'VERDE.gif', // Ruta a tu imagen de icono
-            iconSize: [40, 40], // Tamaño del icono
-            iconAnchor: [20, 40], // Punto del icono que se corresponderá con la posición del marcador
-            popupAnchor: [0, -40] // Punto desde el cual se abrirá el popup relativo al icono
+
+        //1 ROJO
+        //2 VERDE
+        //3 NARANJA
+        
+       
+        let iconRed = L.icon({
+            iconUrl: 'ROJO.png', // Ruta a tu imagen de icono
+            iconSize: [50, 50], // Tamaño del icono
+            iconAnchor: [25, 50], // Punto del icono que se corresponderá con la posición del marcador
+            popupAnchor: [0, -50] 
+ 
         });
     
-        let customInventoryTwo = L.icon({
-            iconUrl: 'AMARILLO.gif', // Ruta a tu imagen de icono
-            iconSize: [40, 40], // Tamaño del icono
-            iconAnchor: [20, 40], // Punto del icono que se corresponderá con la posición del marcador
-            popupAnchor: [0, -40] // Punto desde el cual se abrirá el popup relativo al icono
+        let iconGreen = L.icon({
+            iconUrl: 'VERDE.png', // Ruta a tu imagen de icono
+            iconSize: [50, 50], // Tamaño del icono
+            iconAnchor: [25, 50], // Punto del icono que se corresponderá con la posición del marcador
+            popupAnchor: [0, -50] 
+  
         });
     
-        let customInventoryThree = L.icon({
-            iconUrl: 'ROJO.gif', // Ruta a tu imagen de icono
-            iconSize: [40, 40], // Tamaño del icono
-            iconAnchor: [20, 40], // Punto del icono que se corresponderá con la posición del marcador
-            popupAnchor: [0, -40] // Punto desde el cual se abrirá el popup relativo al icono
+        let iconOrange = L.icon({
+            iconUrl: 'NARANJA.png', // Ruta a tu imagen de icono
+            iconSize: [50, 50], // Tamaño del icono
+            iconAnchor: [25, 50], // Punto del icono que se corresponderá con la posición del marcador
+            popupAnchor: [0, -50] 
+          
         });
     
     
         let iconCustom = '';
+      
 
 
         // Itera sobre las posiciones y agrega marcadores al LayerGroup
         result.forEach(position => {
 
-            console.log(position.inventory);
 
 
             let latitude = position.latitude;
             let longitude = position.longitude;
 
+         
             if(position.inventory==1){
-                iconCustom=customInventoryOne;
+                iconCustom=iconRed;
             }else if(position.inventory==2){
-                iconCustom=customInventoryTwo;
-            }else{
-                iconCustom=customInventoryThree;
+                iconCustom=iconGreen;
+            }else if(position.inventory==3){
+                iconCustom=iconOrange;
             }
         
-            console.log(iconCustom);
-
-
-            let marker = L.marker([latitude, longitude], { icon: iconCustom })
-
-                .bindPopup(`
+           
+            let marker = L.marker([latitude, longitude], { icon: iconCustom }).bindPopup(`
                     Nombre:          ${position.name}<br>
                     Empresa:         ${position.company}<br>
                     Proyecto:        ${position.project_id}<br>
