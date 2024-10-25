@@ -15,7 +15,9 @@ function showPosition(position){
 
     let customIcon = L.icon({
         iconUrl: 'AMARILLO.png', // Ruta a tu imagen de icono
-        iconSize: [40, 40], // Tamaño del icono
+        iconSize: [50, 50], // Tamaño del icono
+        iconAnchor: [25, 50], // Punto del icono que se corresponderá con la posición del marcador
+        popupAnchor: [0, -50] 
 
     });
 
