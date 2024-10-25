@@ -29,11 +29,13 @@
     <script src="locationDistance.js" ></script>
 
     <script>
+
         // Create a map  
         let map         = L.map('map').setView([51.505, -0.09], 10);
         let apiLink     = "https://gps.siarexdev.com/api/v1/";
-        let bearerToken = "3|NKSBTBDrDT5gGUAIk45x2iTHx0x9W5egC1YYELnU4758447e";
+        let bearerToken = "3|vvZPCVQHDHrBV6MtqCcYfVZLL15HJm8TrvJNzeDJ038f87b7";
         let userMarker; // Variable global para almacenar el marcador del usuario
+        let OnlyOneAsset = []; // Variable global para almacenar el marcador del activo, en busquedas 1 a 1
 
         //user info
         let user_id = 1;
@@ -41,6 +43,9 @@
 
         //marcadores de activos
         let markersLayer; // Variable global para almacenar el LayerGroup de marcadores
+
+        //Buscar un solo activo
+        let asset_id = null;
 
 
         // Add a tile layer
@@ -53,11 +58,13 @@
        const updateInterval = 10000;
         // Llama a getLocation cada updateInterval milisegundos
         setInterval(getLocation, updateInterval);
+
         //ubicación del usuario
         getLocation();
 
         //ubication de los assets
         locationDistance();
+
 
     </script>
 

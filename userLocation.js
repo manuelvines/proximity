@@ -1,5 +1,3 @@
-
-
 /**Acceder a la localización del usario */
 function getLocation() {
     if (navigator.geolocation) {
@@ -13,31 +11,33 @@ function getLocation() {
 function showPosition(position){
  
     let latitude   = position.coords.latitude;
-    let longitude = position.coords.longitude;
+    let longitude  = position.coords.longitude;
+
+    let customIcon = L.icon({
+        iconUrl: 'AZUL.gif', // Ruta a tu imagen de icono
+        iconSize: [40, 40], // Tamaño del icono
+
+    });
 
     /**Marcador del usuario */
     if (typeof map !== 'undefined') {
       
         // Centrar a la posición del usuario
         //map.setView([latitude, longitude], 10);
-
-        //borrar marcadores anteriores
-
-
-        // Utilizar fitBounds para ajustar el zoom automáticamente
-        //map.fitBounds([[latitude, longitude], [latitude, longitude]]);
       
         if (userMarker) {
             // Si el marcador ya existe, actualiza su posición
-            userMarker.setLatLng([latitude, longitude]);
+            userMarker.setLatLng([latitude, longitude], { icon: customIcon });
+
         } else {
             // Si el marcador no existe, crea uno nuevo
-            userMarker = L.marker([latitude, longitude]).addTo(map)
-                .bindPopup('Esta es la ubicación del usuario.');
-                .openPopup();
+            userMarker = L.marker([latitude, longitude], { icon: customIcon })
+            .addTo(map)
+            .bindPopup('Esta es la ubicación del usuario. :D').openPopup();
         }
 
         updateUserLocation(latitude, longitude);
+
 
     } else {
         console.error('Map is not defined');
@@ -64,23 +64,19 @@ async function updateUserLocation(latitude, longitude) {
 
     //REQUEST
     const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: formdata,
-        redirect: "follow"
-        };
-    
-
-
+            method: "POST",
+            headers: myHeaders,
+            body: formdata,
+            redirect: "follow"
+          };
+        
         try {
             const response = await fetch(apiLink + "location", requestOptions);
-            const result = await response.text();
-            console.log(result);
+            const result = await response.json();
+            //console.log(result);
         } catch (error) {
             console.error('Error:', error);
         }
-
-
 }
 
 
