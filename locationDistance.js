@@ -32,6 +32,15 @@ async function locationDistance() {
            try {
                const response = await fetch(apiLink + "location/distances", requestOptions);
                const result = await response.json();
+
+                    
+                if(result.data.length==1){
+
+                    let position = result.data[0];
+                    assetMarker = L.marker([position.latitude, position.longitude]);
+                }
+
+
                showPositions(result.data);
 
            } catch (error) {
@@ -92,6 +101,11 @@ function showPositions(result) {
         // Itera sobre las posiciones y agrega marcadores al LayerGroup
         result.forEach(position => {
 
+
+            console.log(position.length);
+          
+
+           
 
 
             let latitude = position.latitude;

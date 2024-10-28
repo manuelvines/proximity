@@ -45,7 +45,8 @@
         let markersLayer; // Variable global para almacenar el LayerGroup de marcadores
 
         //Buscar un solo activo
-        let asset_id = null;
+        let asset_id = 1;
+        let assetMarker = null;
 
 
         // Add a tile layer
@@ -58,12 +59,28 @@
        const updateInterval = 1000;
         // Llama a getLocation cada updateInterval milisegundos
         setInterval(getLocation, updateInterval);
+        setInterval(showLine, updateInterval);
 
         //ubicación del usuario
         getLocation();
 
         //ubication de los assets
         locationDistance();
+
+
+        function showLine(){
+
+            if(assetMarker!=null && userMarker != null){
+                 //dibubar linea 
+                    let latlngs = [
+                        [assetMarker.getLatLng().lat, assetMarker.getLatLng().lng],
+                        [userMarker.getLatLng().lat, userMarker.getLatLng().lng]
+                    ];
+                    //dubujar linea
+                    let polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);                    
+            }
+
+        }
 
 
     </script>
